@@ -6,6 +6,6 @@ COPY package.json .
 RUN npm install
 
 COPY . /src/app
-EXPOSE 80
+EXPOSE 8080
 
-CMD [ "sh", "-c", "npm run docker && npm start" ]
+CMD [ "sh", "-c", "npm start" ]
