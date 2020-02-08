@@ -12,22 +12,42 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use('/', express.static(path.join(__dirname, '../public'))); // for serving static files
 
+
+// Proxy requests to modules
 app.get('/spaces', function(req, res) {
-  // console.log(req.params);
-  // res.send('hello spaces');
-  req.pipe(request.get('localhost:3001/spaces')).pipe(res);
+  request(`http://localhost:3001/spaces?id=${req.query.id}`, function (error, response, body) {
+    if (error) {
+      console.error('error:', error);
+    } else {
+      console.log('statusCode:', response && response.statusCode);
+      console.log('body:', body);
+      res.send(response);
+    }
+  });
 });
 
 app.get('/reservations', function(req, res) {
-  // console.log(req.params);
-  // res.send('hello reservations');
-  req.pipe(request.get('localhost:3001/reservations')).pipe(res);
+  request(`http://localhost:3001/reservations?spaceId=${req.query.spaceId}`, function (error, response, body) {
+    if (error) {
+      console.error('error:', error);
+    } else {
+      console.log('statusCode:', response && response.statusCode);
+      console.log('body:', body);
+      res.send(response);
+    }
+  });
 });
 
 app.post('/reservations', function(req, res) {
-  // console.log(req.body);
-  // res.send('hello reservations');
-  req.pipe(request.post('localhost:3001/reservations')).pipe(res);
+  request('http://localhost:3001/reservations', function (error, response, body) {
+    if (error) {
+      console.error('error:', error);
+    } else {
+      console.log('statusCode:', response && response.statusCode);
+      console.log('body:', body);
+      res.send(response);
+    }
+  });
 });
 
 app.listen(port, () => console.log(`Proxy server listening on port ${port}!`));
