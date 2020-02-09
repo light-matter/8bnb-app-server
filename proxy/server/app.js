@@ -14,38 +14,40 @@ app.use('/', express.static(path.join(__dirname, '../public'))); // for serving 
 
 
 // Proxy requests to modules
+const reservationModuleUrl = 'http://ec2-18-221-158-53.us-east-2.compute.amazonaws.com';
+const reviewsModuleUrl = 'http://ec2-18-216-209-189.us-east-2.compute.amazonaws.com:3000'; // add routes
+const calendarModuleUrl = 'http://ec2-18-221-158-53.us-east-2.compute.amazonaws.com'; // change and add routes
+const similarHomesModuleUrl = 'http://ec2-18-221-158-53.us-east-2.compute.amazonaws.com'; // change and add routes
+
 app.get('/spaces', function(req, res) {
-  request(`http://localhost:3001/spaces?id=${req.query.id}`, function (error, response, body) {
+  request(`${reservationModuleUrl}/spaces?id=${req.query.id}`, function (error, response, body) {
     if (error) {
       console.error('error:', error);
     } else {
       console.log('statusCode:', response && response.statusCode);
-      console.log('body:', body);
-      res.send(response);
+      res.send(body);
     }
   });
 });
 
 app.get('/reservations', function(req, res) {
-  request(`http://localhost:3001/reservations?spaceId=${req.query.spaceId}`, function (error, response, body) {
+  request(`${reservationModuleUrl}/reservations?spaceId=${req.query.spaceId}`, function (error, response, body) {
     if (error) {
       console.error('error:', error);
     } else {
       console.log('statusCode:', response && response.statusCode);
-      console.log('body:', body);
-      res.send(response);
+      res.send(body);
     }
   });
 });
 
 app.post('/reservations', function(req, res) {
-  request('http://localhost:3001/reservations', function (error, response, body) {
+  request(`${reservationModuleUrl}/reservations`, function (error, response, body) {
     if (error) {
       console.error('error:', error);
     } else {
       console.log('statusCode:', response && response.statusCode);
-      console.log('body:', body);
-      res.send(response);
+      res.send(body);
     }
   });
 });
