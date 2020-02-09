@@ -16,10 +16,11 @@ app.use('/', express.static(path.join(__dirname, '../public'))); // for serving 
 // Proxy requests to modules
 const reservationModuleUrl = 'http://ec2-18-221-158-53.us-east-2.compute.amazonaws.com';
 const reviewsModuleUrl = 'http://ec2-18-216-209-189.us-east-2.compute.amazonaws.com:3000'; // add routes
-const calendarModuleUrl = 'http://ec2-18-221-158-53.us-east-2.compute.amazonaws.com'; // change and add routes
-const similarHomesModuleUrl = 'http://ec2-18-221-158-53.us-east-2.compute.amazonaws.com'; // change and add routes
+const calendarModuleUrl = 'http://ec2-54-153-109-129.us-west-1.compute.amazonaws.com:3000'; // add routes
+const similarHomesModuleUrl = 'http://ec2-54-183-237-192.us-west-1.compute.amazonaws.com:3001'; // change and add routes
 
-app.get('/spaces', function(req, res) {
+// Forward requests for a space's info to reservations module
+app.get('/spaces', function (req, res) {
   request(`${reservationModuleUrl}/spaces?id=${req.query.id}`, function (error, response, body) {
     if (error) {
       console.error('error:', error);
@@ -30,7 +31,8 @@ app.get('/spaces', function(req, res) {
   });
 });
 
-app.get('/reservations', function(req, res) {
+// Forward requests for a list of reservations to reservations module
+app.get('/reservations', function (req, res) {
   request(`${reservationModuleUrl}/reservations?spaceId=${req.query.spaceId}`, function (error, response, body) {
     if (error) {
       console.error('error:', error);
@@ -41,7 +43,8 @@ app.get('/reservations', function(req, res) {
   });
 });
 
-app.post('/reservations', function(req, res) {
+// Forward requests to post a reservation to reservations module server (WIP)
+app.post('/reservations', function (req, res) {
   request(`${reservationModuleUrl}/reservations`, function (error, response, body) {
     if (error) {
       console.error('error:', error);
@@ -50,6 +53,42 @@ app.post('/reservations', function(req, res) {
       res.send(body);
     }
   });
+});
+
+// Forward requests to get a list of homes to Will's similar homes module
+app.get('/homes', function (req, res) {
+  request(`${similarHomesModuleUrl}/homes`, function (error, response, body) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('statusCode:', response && response.statusCode);
+      res.send(body);
+    }
+  })
+});
+
+// Forward requests to get a list of reviews to Jeremiah's reviews module
+app.get('/reviews', function (req, res) {
+  request(`${reviewsModuleUrl}/reviews`, function (error, response, body) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('statusCode:', response && response.statusCode);
+      res.send(body);
+    }
+  })
+});
+
+// Forward requests to get a space's reservations to Vikas' calendar module
+app.get('/data/:id', function (req, res) {
+  request(`${reviewsModuleUrl}/data/${req.params.id}`, function (error, response, body) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('statusCode:', response && response.statusCode);
+      res.send(body);
+    }
+  })
 });
 
 app.listen(port, () => console.log(`Proxy server listening on port ${port}!`));
