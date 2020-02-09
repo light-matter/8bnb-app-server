@@ -1,88 +1,22 @@
-body {
-    width: 850px !important;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-evenly;
+#top {
+  width: 100%;
 }
 
-#top-image {
-    width: 100%;
-    position: absolute;
-    left: 0;
+#description {
+  min-width: 670px;
+  max-width: 670px;
 }
 
-#side-image {
-    position: relative;
-    top: 400px;
-    left: 0;
+.container {
+  display: flex;
+  justify-content: center;
 }
 
-.main-container {
-    display: flex;
-    flex-direction: column;
-    width: 600px;
-    margin: 0px;
-    left: -50px;
-    position: relative;
+#Carousel {
+  display: flex;
+  justify-content: center;
 }
 
-.main-description {
-    width: 445px;
-    display: inline-block;
-    position: relative;
-    top: -340px;
-    margin-right: 25px;
-}
-
-#reservation {
-    display: inline-block;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 30px;
-}
-
-.overallComponent {
-    width: 617px !important;
-    position: relative;
-    bottom: -338px;
-    right: -4px;
-}
-
-.calendarDiv {
-    /* width: 269px; */
-}
-
-.dateButton {
-    width: 39px;
-    height: 39px;
-    border: 1px solid rgb(255, 255, 255);
-    border-radius: 7px;
-    padding: 0px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.day {
-    width: 35px !important;
-}
-
-.sidebar {
-    width: 300px;
-    display: inline-block;
-    padding-top: 400px;
-}
-
-.banner {
-    height: 300px;
-    width: 1200px;
-}
-
-#reviews {
-    position: relative;
-    top: 336px;
-}
-
-footer {
-    position: absolute;
-    bottom: -3231px;
+.padding {
+  padding: 16px;
 }
