@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  proxy:
+    build: https://github.com/light-matter/8bnb-app-server.git
+    container_name: proxy
+    ports:
+      - '80:8080'

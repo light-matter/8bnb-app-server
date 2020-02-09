@@ -24,8 +24,5 @@ coverage
 build/
 dist/
 
-# Docker-compose
-docker-compose.yml
-
 # Seed data
 data.pgsql
