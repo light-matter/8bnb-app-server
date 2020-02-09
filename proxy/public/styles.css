@@ -1,10 +1,18 @@
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
 #top {
   width: 100%;
 }
 
 #description {
-  min-width: 670px;
-  max-width: 670px;
+  width: 670px;
 }
 
 .container {
@@ -17,6 +25,6 @@
   justify-content: center;
 }
 
-.padding {
+.center {
   padding: 16px;
 }
