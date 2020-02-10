@@ -15,9 +15,9 @@ app.use('/', express.static(path.join(__dirname, '../public'))); // for serving 
 
 // Proxy requests to modules
 const reservationModuleUrl = 'http://ec2-18-221-158-53.us-east-2.compute.amazonaws.com';
-const reviewsModuleUrl = 'http://ec2-18-216-209-189.us-east-2.compute.amazonaws.com:3000'; // add routes
-const calendarModuleUrl = 'http://ec2-54-153-109-129.us-west-1.compute.amazonaws.com:3000'; // add routes
-const similarHomesModuleUrl = 'http://ec2-54-183-237-192.us-west-1.compute.amazonaws.com:3001'; // change and add routes
+const reviewsModuleUrl = 'http://ec2-18-224-18-111.us-east-2.compute.amazonaws.com:3003';
+const calendarModuleUrl = 'http://ec2-54-153-109-129.us-west-1.compute.amazonaws.com:3000';
+const similarHomesModuleUrl = 'http://ec2-54-183-237-192.us-west-1.compute.amazonaws.com:3001';
 
 // Forward requests for a space's info to reservations module
 app.get('/spaces', function (req, res) {
